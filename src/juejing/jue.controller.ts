@@ -21,7 +21,7 @@ export class JueController {
     return await this.jueService.dialySign(body);
   }
 
-  @Post('autoSign')
+  @Get('autoSign')
   async autoSign(): Promise<result> {
     return await this.jueService.autoSign();
   }
