@@ -25,4 +25,10 @@ export class JueController {
   async autoSign(): Promise<result> {
     return await this.jueService.autoSign();
   }
+
+  @Get('test')
+  test(): string {
+    console.log(process.env);
+    return 'ok';
+  }
 }
