@@ -2,7 +2,7 @@
   "name": "sign-in",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "heart",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -29,9 +29,11 @@
     "@types/axios": "^0.14.0",
     "axios": "^0.26.1",
     "cross-env": "^7.0.3",
+    "mysql2": "^2.3.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "typeorm": "^0.3.6"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
@@ -39,7 +41,7 @@
     "@nestjs/testing": "^8.0.0",
     "@types/express": "^4.17.13",
     "@types/jest": "27.4.1",
-    "@types/node": "^16.0.0",
+    "@types/node": "^17.0.31",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",

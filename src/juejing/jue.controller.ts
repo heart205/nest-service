@@ -6,7 +6,7 @@
 
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { jueServices } from './jue.service';
-import type { addSignInfo, result, signInfo } from './jue.interface';
+import type { addSignInfo, result, signInfo } from './jue';
 @Controller('jue')
 export class JueController {
   constructor(private readonly jueService: jueServices) {}

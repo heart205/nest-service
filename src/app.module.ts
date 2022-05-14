@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { jueModule } from './juejing/jue.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from '@nestjs/common'
+import { AppController } from './app.controller'
+import { AppService } from './app.service'
+import { jueModule } from './juejing/jue.module'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { ArticleModule } from './modules/articleDetail.module'
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -42,11 +43,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           entities: ['dist/**/*.entity.js'],
           synchronize: true,
           logging: false,
-        };
+        }
       },
       inject: [ConfigService],
     }),
     jueModule,
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService, ConfigService],
