@@ -1,7 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm'
 
 @Entity()
 export class HArticleDetails {
+  //PrimaryGeneratedColumn 主键自动生成的列
   @PrimaryGeneratedColumn()
   id: number
 
@@ -13,4 +20,10 @@ export class HArticleDetails {
 
   @Column()
   title: string
+
+  @CreateDateColumn()
+  createTime: Date | string
+
+  @UpdateDateColumn()
+  updateTime: Date | string
 }
