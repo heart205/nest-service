@@ -5,8 +5,8 @@
  */
 
 import { Body, Controller, Get, Post } from '@nestjs/common'
-import { jueServices } from '../juejing/jue.servicee.service'
-import type { addSignInfo, result, signInfo } from '../juejing/jueejing/jue'
+import { jueServices } from '../services/jue.service'
+import type { addSignInfo, result, signInfo } from '../types/jue'
 @Controller('jue')
 export class JueController {
   constructor(private readonly jueService: jueServices) {}

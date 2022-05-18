@@ -5,6 +5,7 @@ import { jueModule } from './modules/jue.module'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ArticleModule } from './modules/articleDetail.module'
+import commonModule from './modules/common.module'
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -49,6 +50,7 @@ import { ArticleModule } from './modules/articleDetail.module'
     }),
     jueModule,
     ArticleModule,
+    commonModule,
   ],
   controllers: [AppController],
   providers: [AppService, ConfigService],
