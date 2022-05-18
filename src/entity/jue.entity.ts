@@ -1,16 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class jueEntitys {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Column('int')
-  aid: number;
+  aid: number
 
   @Column()
-  uuid: string;
+  uuid: string
 
   @Column('varchar', { length: 2000 })
-  cookies: string;
+  cookies: string
 }
