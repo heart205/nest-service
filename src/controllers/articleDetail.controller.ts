@@ -2,21 +2,22 @@ import { Body, Controller, Post } from '@nestjs/common'
 import {
   articleBodyParams,
   articleDetailInfo,
+  responseArticleDetail,
   updateArticleInfo,
 } from 'src/types/articleDetail'
 import { ArticleDetailServices } from '../services/articleDetail.service'
 import { BaseResponse } from 'src/utils/baseResponse'
 import { BaseResponseCode } from '../constant/code'
-import { HArticleDetails } from 'src/entity/article.entity'
 import type { articleDetailsInfo } from '../types/articleDetail'
+import type { pageNationMerge } from 'src/types/common'
 
 @Controller('article')
 export class ArticleDetailControllers {
   constructor(private readonly ArticleDetailService: ArticleDetailServices) {}
   @Post('getArticleDetail')
   async getArticleDetail(
-    @Body() data: articleBodyParams,
-  ): Promise<BaseResponse<HArticleDetails[]>> {
+    @Body() data: pageNationMerge<articleBodyParams>,
+  ): Promise<BaseResponse<responseArticleDetail>> {
     return await this.ArticleDetailService.getArticleDetail(data)
   }
 

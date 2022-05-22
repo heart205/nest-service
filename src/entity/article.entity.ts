@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm'
 
-@Entity()
+@Entity('h_article_details')
 export class HArticleDetails {
   //PrimaryGeneratedColumn 主键自动生成的列
   @PrimaryGeneratedColumn()
@@ -20,6 +20,9 @@ export class HArticleDetails {
 
   @Column()
   title: string
+
+  @Column('int', { default: 0 }) // 审核中 0 审核通过 1 审核不通过 -1
+  status: number
 
   @CreateDateColumn()
   createTime: Date | string

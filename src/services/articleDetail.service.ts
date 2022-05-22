@@ -8,9 +8,11 @@ import type {
   articleBodyParams,
   articleDetailInfo,
   updateArticleInfo,
+  responseArticleDetail,
 } from '../types/articleDetail'
 import { BaseResponse } from 'src/utils/baseResponse'
 import { BaseResponseCode } from 'src/constant/code'
+import { pageNationMerge } from 'src/types/common'
 @Injectable()
 export class ArticleDetailServices {
   constructor(
@@ -19,21 +21,28 @@ export class ArticleDetailServices {
   ) {}
 
   async getArticleDetail(
-    data: articleBodyParams,
-  ): Promise<BaseResponse<HArticleDetails[]>> {
+    data: pageNationMerge<articleBodyParams>,
+  ): Promise<BaseResponse<responseArticleDetail>> {
     try {
-      const val = await this.articleDetails.find({
-        where: { userId: data.userId },
+      const { status, userId, pageSize, offset } = data
+      // 查询审核中 0 审核通过 1 审核不通过 -1 的总数量 不传查全部
+      const [val, total] = await this.articleDetails.findAndCount({
+        where: { userId: userId, status: status },
+        take: pageSize || 10,
+        skip: (offset - 1) * pageSize || 0,
       })
       if (val instanceof Array) {
         val.forEach((v) => {
           v.createTime = dayjs(v.createTime).format('YYYY-MM-DD HH:mm:ss')
           v.updateTime = dayjs(v.updateTime).format('YYYY-MM-DD HH:mm:ss')
         })
-        return new BaseResponse(BaseResponseCode.SUCCESS, '查询成功', val)
+        return new BaseResponse(BaseResponseCode.SUCCESS, '查询成功', {
+          data: val,
+          total: total,
+        })
       }
     } catch (e) {
-      console.log(e)
+      console.log('get article detail error is :', e)
       return new BaseResponse(BaseResponseCode.FAIL, '查询失败', e.message)
     }
   }
@@ -53,13 +62,14 @@ export class ArticleDetailServices {
     }
   }
 
-  async getArticleDetailsInfo(data: articleDetailInfo) {
+  async getArticleDetailsInfo(
+    data: articleDetailInfo,
+  ): Promise<BaseResponse<HArticleDetails>> {
     try {
       const val = await this.articleDetails.findOne({
         where: { id: data.id },
       })
       // 是一个对象
-      console.log(val)
       if (val) {
         return new BaseResponse(BaseResponseCode.SUCCESS, '查询成功', val)
       }
@@ -72,8 +82,12 @@ export class ArticleDetailServices {
 
   async updateArticleInfo(data: updateArticleInfo) {
     try {
-      const val = await this.articleDetails.update({ id: data.id }, data)
-      console.log('article data update info is', val)
+      console.log('article data update info data value is :', data)
+      const { id, title } = data
+      if (title.trim() === '') {
+        throw new Error('标题不能为空')
+      }
+      const val = await this.articleDetails.update({ id }, data)
       if (val) {
         return new BaseResponse(BaseResponseCode.SUCCESS, '更新成功')
       }

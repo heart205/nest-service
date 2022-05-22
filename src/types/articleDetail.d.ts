@@ -1,8 +1,9 @@
 /**
  * getArticleList 获取参数
  */
-export interface articleBodyParams {
+export type articleBodyParams = {
   userId: number
+  status?: number
 }
 
 export interface articleDetailsInfo {
@@ -13,6 +14,11 @@ export interface articleDetailsInfo {
 
 export interface articleDetailInfo {
   id: number
+}
+
+export interface responseArticleDetail {
+  data: HArticleDetails[]
+  total: SelectQueryBuilder<HArticleDetails>
 }
 
 export type updateArticleInfo = {
