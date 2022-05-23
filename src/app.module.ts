@@ -43,7 +43,7 @@ import commonModule from './modules/common.module'
           database: config.get('DATABASE') as any,
           entities: ['dist/**/*.entity.js'],
           synchronize: true,
-          logging: false,
+          logging: true,
         }
       },
       inject: [ConfigService],

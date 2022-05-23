@@ -28,3 +28,10 @@ export type updateArticleInfo = {
     ? articleDetailInfo[k]
     : articleDetailsInfo[k]
 }
+
+export interface statusLength {
+  underReview: number
+  examinationPassed: number
+  auditNotPassed: number
+  total: number
+}

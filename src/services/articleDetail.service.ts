@@ -13,6 +13,7 @@ import type {
 import { BaseResponse } from 'src/utils/baseResponse'
 import { BaseResponseCode } from 'src/constant/code'
 import { pageNationMerge } from 'src/types/common'
+import { statusLength } from '../types/articleDetail'
 @Injectable()
 export class ArticleDetailServices {
   constructor(
@@ -96,5 +97,71 @@ export class ArticleDetailServices {
       console.log(e)
       return new BaseResponse(BaseResponseCode.FAIL, '更新失败', e.message)
     }
+  }
+  // 如何一次子查询查询3个结果
+  getStatusNumber(id: number, status: number | string) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        ;(typeof status === 'string'
+          ? this.articleDetails.countBy({
+              userId: id,
+            })
+          : this.articleDetails.countBy({
+              status,
+              userId: id,
+            })
+        ).then((data) => {
+          resolve(data)
+        })
+      } catch (e) {
+        reject(e.message)
+      }
+    })
+  }
+
+  async getAllStatusNumbers(
+    data: articleDetailInfo,
+  ): Promise<BaseResponse<statusLength>> {
+    return new Promise((resolve) => {
+      try {
+        const { id } = data
+        const arr = [-1, 0, 1, '']
+        Promise.all(
+          arr.map((val) => {
+            return this.getStatusNumber(id, val)
+          }),
+        ).then((res) => {
+          console.log(res)
+          const obj: statusLength = {
+            examinationPassed: 0,
+            underReview: 0,
+            auditNotPassed: 0,
+            total: 0,
+          }
+          res.forEach((val: number, index) => {
+            switch (index) {
+              case 0: {
+                obj.auditNotPassed = val
+                break
+              }
+              case 1: {
+                obj.underReview = val
+                break
+              }
+              case 2: {
+                obj.examinationPassed = val
+                break
+              }
+              default: {
+                obj.total = val
+              }
+            }
+          })
+          resolve(new BaseResponse(BaseResponseCode.SUCCESS, '查询成功', obj))
+        })
+      } catch (e) {
+        return Promise.reject(e.message)
+      }
+    })
   }
 }

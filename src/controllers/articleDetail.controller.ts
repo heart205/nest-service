@@ -8,9 +8,8 @@ import {
 import { ArticleDetailServices } from '../services/articleDetail.service'
 import { BaseResponse } from 'src/utils/baseResponse'
 import { BaseResponseCode } from '../constant/code'
-import type { articleDetailsInfo } from '../types/articleDetail'
+import type { articleDetailsInfo, statusLength } from '../types/articleDetail'
 import type { pageNationMerge } from 'src/types/common'
-
 @Controller('article')
 export class ArticleDetailControllers {
   constructor(private readonly ArticleDetailService: ArticleDetailServices) {}
@@ -42,5 +41,16 @@ export class ArticleDetailControllers {
   @Post('updateArticleInfo')
   async updateArticleInfo(@Body() data: updateArticleInfo) {
     return await this.ArticleDetailService.updateArticleInfo(data)
+  }
+
+  @Post('getAllStatusNumbers')
+  async getAllStatusNumbers(
+    @Body() data: articleDetailInfo,
+  ): Promise<BaseResponse<statusLength>> {
+    try {
+      return await this.ArticleDetailService.getAllStatusNumbers(data)
+    } catch (e) {
+      return new BaseResponse(BaseResponseCode.SUCCESS, '查询失败', e.message)
+    }
   }
 }
