@@ -44,6 +44,7 @@ import commonModule from './modules/common.module'
           entities: ['dist/**/*.entity.js'],
           synchronize: true,
           logging: true,
+          cache: false,
         }
       },
       inject: [ConfigService],

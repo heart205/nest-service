@@ -4,8 +4,12 @@
  * @Date 2022-05-22
  */
 
-import { Controller, Get } from '@nestjs/common'
+import { Body, Controller, Get, Post } from '@nestjs/common'
+import SysDict from 'src/entity/sysDict.entity'
 import SysDictService from 'src/services/sysDict.service'
+import { dateMergeTotal, pageNationMerge } from 'src/types/common'
+import { DictionaryInterface, SearchInterface } from 'src/types/dictionary'
+import { BaseResponse } from 'src/utils/baseResponse'
 
 @Controller('sysDict')
 export default class SysDictController {
@@ -14,5 +18,19 @@ export default class SysDictController {
   @Get('test')
   test() {
     return 'ok'
+  }
+
+  @Post('addData')
+  addData(
+    @Body() data: DictionaryInterface,
+  ): Promise<BaseResponse<string | null>> {
+    return this.sysDictService.addData(data)
+  }
+
+  @Post('searchDictionary')
+  searchData(
+    @Body() data: pageNationMerge<SearchInterface>,
+  ): Promise<BaseResponse<dateMergeTotal<SysDict[]>>> {
+    return this.sysDictService.searchData(data)
   }
 }

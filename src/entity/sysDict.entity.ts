@@ -25,6 +25,9 @@ export default class SysDict {
   @Column('varchar', { length: 255 })
   name: string
 
+  @Column('varchar', { length: 255 })
+  description: string
+
   @Column('int', { default: 0 })
   isDelete: number
 

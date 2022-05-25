@@ -10,3 +10,8 @@ export type pageNationMerge<T extends Record<string | number, unknown>> = {
 }
 
 type a = pageNationMerge<articleBodyParams>
+
+type dateMergeTotal<T, U extends number = number> = {
+  list: T
+  total: U
+}
