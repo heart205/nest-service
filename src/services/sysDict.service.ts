@@ -6,10 +6,14 @@
 
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { DictionaryInterface, SearchInterface } from 'src/types/dictionary'
+import {
+  dictionaryDetail,
+  DictionaryInterface,
+  SearchInterface,
+} from 'src/types/dictionary'
 import SysDict from 'src/entity/sysDict.entity'
 import { Repository } from 'typeorm'
-import { dateMergeTotal, pageNationMerge } from 'src/types/common'
+import { dateMergeTotal, mergeObj, pageNationMerge } from 'src/types/common'
 import { BaseResponse } from 'src/utils/baseResponse'
 import { BaseResponseCode } from 'src/constant/code'
 @Injectable()
@@ -38,8 +42,35 @@ export default class SysDictService {
     }
   }
 
+  async editData(
+    // 创建人id不可更改
+    data: mergeObj<
+      Pick<DictionaryInterface, Exclude<keyof DictionaryInterface, 'userId'>>,
+      { id: number }
+    >,
+  ): Promise<BaseResponse<string | null>> {
+    try {
+      const { dictionaryCode, dictionaryName, describe, id } = data
+      const val = await this.sysDict.update(
+        { id },
+        {
+          code: dictionaryCode,
+          name: dictionaryName,
+          description: describe,
+        },
+      )
+      console.log('edit dictionary data', val)
+      if (val) {
+        return new BaseResponse(BaseResponseCode.SUCCESS, '编辑成功')
+      }
+    } catch (e) {
+      return new BaseResponse(BaseResponseCode.FAIL, '编辑失败', e.message)
+    }
+  }
+
   async searchData(
     data: pageNationMerge<SearchInterface>,
+    isDelete = 0,
   ): Promise<BaseResponse<dateMergeTotal<SysDict[]>>> {
     try {
       const { pageSize, offset } = data
@@ -55,6 +86,7 @@ export default class SysDictService {
           'createTime',
           'updateTime',
         ],
+        where: { isDelete: isDelete },
         take: pageSize || 10,
         skip: (offset - 1) * pageSize || 0,
       })
@@ -67,6 +99,47 @@ export default class SysDictService {
     } catch (e) {
       console.log('search dictionary error is :', e)
       return new BaseResponse(BaseResponseCode.FAIL, '查询失败', e.message)
+    }
+  }
+
+  async searchDictionaryDetail(
+    data: dictionaryDetail,
+  ): Promise<BaseResponse<SysDict>> {
+    try {
+      const { id } = data
+      const val = await this.sysDict.findOne({
+        select: [
+          'id',
+          'code',
+          'name',
+          'description',
+          'status',
+          'orderType',
+          'createUserId',
+          'createTime',
+          'updateTime',
+        ],
+        where: { id },
+      })
+      if (val && val.id) {
+        return new BaseResponse(BaseResponseCode.SUCCESS, '查询成功', val)
+      }
+    } catch (e) {
+      console.log('search dictionary error is :', e)
+      return new BaseResponse(BaseResponseCode.FAIL, '查询失败', e.message)
+    }
+  }
+
+  async deleteData(data: { id: number }): Promise<BaseResponse<string | null>> {
+    try {
+      const { id } = data
+      const val = await this.sysDict.update({ id }, { isDelete: 1 })
+      if (val) {
+        return new BaseResponse(BaseResponseCode.SUCCESS, '删除成功')
+      }
+    } catch (e) {
+      console.log('delete dictionary error is :', e)
+      return new BaseResponse(BaseResponseCode.FAIL, '删除失败', e.message)
     }
   }
 }
