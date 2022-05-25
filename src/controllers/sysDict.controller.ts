@@ -4,7 +4,7 @@
  * @Date 2022-05-22
  */
 
-import { Body, Controller, Get, Post } from '@nestjs/common'
+import { Body, Controller, Headers, Post } from '@nestjs/common'
 import SysDict from 'src/entity/sysDict.entity'
 import SysDictService from 'src/services/sysDict.service'
 import { dateMergeTotal, pageNationMerge } from 'src/types/common'
@@ -14,11 +14,6 @@ import { BaseResponse } from 'src/utils/baseResponse'
 @Controller('sysDict')
 export default class SysDictController {
   constructor(private readonly sysDictService: SysDictService) {}
-
-  @Get('test')
-  test() {
-    return 'ok'
-  }
 
   @Post('addData')
   addData(
