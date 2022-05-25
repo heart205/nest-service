@@ -8,6 +8,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Index,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -20,6 +21,7 @@ export default class SysDict {
   id: number
 
   @Column('varchar', { length: 255 })
+  @Index({ unique: true })
   code: string
 
   @Column('varchar', { length: 255 })
