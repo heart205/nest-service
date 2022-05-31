@@ -45,6 +45,7 @@ import commonModule from './modules/common.module'
           synchronize: true,
           logging: true,
           cache: false,
+          maxQueryExecutionTime: 1000,
         }
       },
       inject: [ConfigService],
