@@ -4,7 +4,7 @@
  * @Date 2022-05-18
  */
 
-import { Body, Controller, Get, Post } from '@nestjs/common'
+import { Body, Controller, Get, Post, Query } from '@nestjs/common'
 import { BaseResponseCode } from '../constant/code'
 import { BaseResponse } from '../utils/baseResponse'
 import commonService from '../services/common.service'
@@ -32,7 +32,7 @@ export class CommonController {
 
   @Get('magicSign')
   async magicSignService(
-    @Body() params: magicSignParams,
+    @Query() params: magicSignParams,
   ): Promise<BaseResponse<string>> {
     try {
       console.log(params)
