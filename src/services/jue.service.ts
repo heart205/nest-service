@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import axios from 'axios'
 import { Repository } from 'typeorm'
-import { jueEntitys } from 'src/entity/jue.entity'
+import { jueEntitys } from '../entity/jue.entity'
 import type { addSignInfo, result, signInfo } from '../types/jue'
 @Injectable()
 export class jueServices {

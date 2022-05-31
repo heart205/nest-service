@@ -1,6 +1,6 @@
 import * as http from 'http'
 import * as queryString from 'querystring'
-import { formInterface } from 'src/types/magicSign'
+import { formInterface } from '../types/magicSign'
 
 export function magicSign(
   cookie: string,

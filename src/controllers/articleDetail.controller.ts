@@ -4,12 +4,12 @@ import {
   articleDetailInfo,
   responseArticleDetail,
   updateArticleInfo,
-} from 'src/types/articleDetail'
+} from '../types/articleDetail'
 import { ArticleDetailServices } from '../services/articleDetail.service'
-import { BaseResponse } from 'src/utils/baseResponse'
+import { BaseResponse } from '../utils/baseResponse'
 import { BaseResponseCode } from '../constant/code'
 import type { articleDetailsInfo, statusLength } from '../types/articleDetail'
-import type { pageNationMerge } from 'src/types/common'
+import type { pageNationMerge } from '../types/common'
 @Controller('article')
 export class ArticleDetailControllers {
   constructor(private readonly ArticleDetailService: ArticleDetailServices) {}

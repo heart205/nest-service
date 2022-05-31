@@ -5,15 +5,15 @@
  */
 
 import { Body, Controller, Post } from '@nestjs/common'
-import SysDict from 'src/entity/sysDict.entity'
-import SysDictService from 'src/services/sysDict.service'
-import { dateMergeTotal, mergeObj, pageNationMerge } from 'src/types/common'
+import SysDict from '../entity/sysDict.entity'
+import SysDictService from '../services/sysDict.service'
+import { dateMergeTotal, mergeObj, pageNationMerge } from '../types/common'
 import {
   dictionaryDetail,
   DictionaryInterface,
   SearchInterface,
-} from 'src/types/dictionary'
-import { BaseResponse } from 'src/utils/baseResponse'
+} from '../types/dictionary'
+import { BaseResponse } from '../utils/baseResponse'
 
 @Controller('sysDict')
 export default class SysDictController {

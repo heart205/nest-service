@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import axios from 'axios'
-import type { addressInfo, temperatureInterface } from 'src/types/utilsCommon'
-import magicSignEntity from 'src/entity/magicSign.entity'
+import type { addressInfo, temperatureInterface } from '../types/utilsCommon'
+import magicSignEntity from '../entity/magicSign.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { useCurrentTemperature } from './hooks/useCurrentTemperature'
-import { formInterface } from 'src/types/magicSign'
-import { magicSign } from 'src/scripts/magicSign'
+import { formInterface } from '../types/magicSign'
+import { magicSign } from '../scripts/magicSign'
 // 根据经纬度获取当前的实时天气信息：
 // https://m.weather.com.cn/mweather/101320101.shtml
 // http://m.weather.com.cn/d/town/index?lat=31.97958&lon=120.89371

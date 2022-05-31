@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common'
-import { CommonController } from 'src/controllers/common.controller'
-import commonService from 'src/services/common.service'
-import SysDictController from 'src/controllers/sysDict.controller'
-import SysDictService from 'src/services/sysDict.service'
-import SysDict from 'src/entity/sysDict.entity'
+import { CommonController } from '../controllers/common.controller'
+import commonService from '../services/common.service'
+import SysDictController from '../controllers/sysDict.controller'
+import SysDictService from '../services/sysDict.service'
+import SysDict from '../entity/sysDict.entity'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import magicSignEntity from 'src/entity/magicSign.entity'
+import magicSignEntity from '../entity/magicSign.entity'
 @Module({
   imports: [TypeOrmModule.forFeature([SysDict, magicSignEntity])],
   controllers: [CommonController, SysDictController],

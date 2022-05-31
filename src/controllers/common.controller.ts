@@ -5,14 +5,14 @@
  */
 
 import { Body, Controller, Get, Post } from '@nestjs/common'
-import { BaseResponseCode } from 'src/constant/code'
-import { BaseResponse } from 'src/utils/baseResponse'
-import commonService from 'src/services/common.service'
+import { BaseResponseCode } from '../constant/code'
+import { BaseResponse } from '../utils/baseResponse'
+import commonService from '../services/common.service'
 import type {
   addressInfo,
   magicSignParams,
   temperatureInterface,
-} from 'src/types/utilsCommon'
+} from '../types/utilsCommon'
 
 @Controller('v1')
 export class CommonController {

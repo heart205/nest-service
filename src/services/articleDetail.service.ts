@@ -10,9 +10,9 @@ import type {
   updateArticleInfo,
   responseArticleDetail,
 } from '../types/articleDetail'
-import { BaseResponse } from 'src/utils/baseResponse'
-import { BaseResponseCode } from 'src/constant/code'
-import { pageNationMerge } from 'src/types/common'
+import { BaseResponse } from '../utils/baseResponse'
+import { BaseResponseCode } from '../constant/code'
+import { pageNationMerge } from '../types/common'
 import { statusLength } from '../types/articleDetail'
 @Injectable()
 export class ArticleDetailServices {

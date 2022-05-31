@@ -10,12 +10,12 @@ import {
   dictionaryDetail,
   DictionaryInterface,
   SearchInterface,
-} from 'src/types/dictionary'
-import SysDict from 'src/entity/sysDict.entity'
+} from '../types/dictionary'
+import SysDict from '../entity/sysDict.entity'
 import { Repository } from 'typeorm'
-import { dateMergeTotal, mergeObj, pageNationMerge } from 'src/types/common'
-import { BaseResponse } from 'src/utils/baseResponse'
-import { BaseResponseCode } from 'src/constant/code'
+import { dateMergeTotal, mergeObj, pageNationMerge } from '../types/common'
+import { BaseResponse } from '../utils/baseResponse'
+import { BaseResponseCode } from '../constant/code'
 @Injectable()
 export default class SysDictService {
   constructor(

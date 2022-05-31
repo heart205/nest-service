@@ -4,7 +4,7 @@
  * @Date 2022-05-18
  */
 
-import { temperatureInterface } from 'src/types/utilsCommon'
+import { temperatureInterface } from '../../types/utilsCommon'
 
 function getWeatherInfo(html: string, data, curReg: RegExp): string | null {
   // const reg = /wcontent\-temp\"\>(.*?)\<\/div/
